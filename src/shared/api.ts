@@ -15,6 +15,7 @@ export type ApiProvider =
 	| "mistral"
 	| "vscode-lm"
 	| "litellm"
+	| "deepclaude"
 
 export interface ApiHandlerOptions {
 	apiModelId?: string

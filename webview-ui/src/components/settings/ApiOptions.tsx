@@ -195,6 +195,7 @@ const ApiOptions = ({ showModelOptions, apiErrorMessage, modelIdErrorMessage, is
 					<VSCodeOption value="lmstudio">LM Studio</VSCodeOption>
 					<VSCodeOption value="ollama">Ollama</VSCodeOption>
 					<VSCodeOption value="litellm">LiteLLM</VSCodeOption>
+					<VSCodeOption value="deepclaude">DeepClaude</VSCodeOption>
 				</VSCodeDropdown>
 			</DropdownContainer>
 
@@ -1403,6 +1404,12 @@ export function normalizeApiConfiguration(apiConfiguration?: ApiConfiguration): 
 				selectedModelId: apiConfiguration?.liteLlmModelId || "",
 				selectedModelInfo: openAiModelInfoSaneDefaults,
 			}
+		case "deepclaude":
+			return {
+					selectedProvider: provider,
+					selectedModelId: apiConfiguration?.openRouterModelId || openRouterDefaultModelId,
+					selectedModelInfo: apiConfiguration?.openRouterModelInfo || openRouterDefaultModelInfo,
+				}
 		default:
 			return getProviderData(anthropicModels, anthropicDefaultModelId)
 	}

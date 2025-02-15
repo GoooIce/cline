@@ -18,6 +18,9 @@ import { MistralHandler } from "./providers/mistral"
 import { VsCodeLmHandler } from "./providers/vscode-lm"
 import { LiteLlmHandler } from "./providers/litellm"
 
+// Reasoner handler
+import { DeepClaudeHandler } from "./reasoner/deepclaude"
+
 export interface ApiHandler {
 	createMessage(systemPrompt: string, messages: Anthropic.Messages.MessageParam[]): ApiStream
 	getModel(): { id: string; info: ModelInfo }
@@ -62,6 +65,8 @@ export function buildApiHandler(configuration: ApiConfiguration): ApiHandler {
 			return new VsCodeLmHandler(options)
 		case "litellm":
 			return new LiteLlmHandler(options)
+		case "deepclaude":
+			return new DeepClaudeHandler(options)
 		default:
 			return new AnthropicHandler(options)
 	}
