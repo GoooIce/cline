@@ -1169,7 +1169,7 @@ const ApiOptions = ({ showModelOptions, apiErrorMessage, modelIdErrorMessage, is
 
 			{selectedProvider === "openrouter" && showModelOptions && <OpenRouterModelPicker isPopup={isPopup} />}
 
-			{selectedProvider === "deepclaude" && showModelOptions && <DeepClaudeView  />}
+			{selectedProvider === "deepclaude" && showModelOptions && <DeepClaudeView />}
 
 			{modelIdErrorMessage && (
 				<p

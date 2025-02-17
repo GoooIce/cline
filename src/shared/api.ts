@@ -67,20 +67,24 @@ export type ApiConfiguration = ApiHandlerOptions & {
 // Models
 
 export interface DeepInfo {
-	modelProviders: { // 模型id，供应商id，提示词模板，优先级, 应用字段设置
-		modelId: string,
-		providerId: string,
-		promptTemplate: string,
-		priority: number, // 优先级越小越早调用
-		applicationFields: string[], // 默认为 content
-		isEnabled: boolean, // 是否启用默认为 true
-	}[],
-	searchProviders: { // 搜索引擎id，提示词模板，优先级
-		providerId: string,
-		promptTemplate: string,
-		priority: number, // 优先级越小越早调用
-		searchFirst: boolean, // 先想再搜索/先搜后扩
-	}[] | undefined,
+	modelProviders: {
+		// 模型id，供应商id，提示词模板，优先级, 应用字段设置
+		modelId: string
+		providerId: string
+		promptTemplate: string
+		priority: number // 优先级越小越早调用
+		applicationFields: string[] // 默认为 content
+		isEnabled: boolean // 是否启用默认为 true
+	}[]
+	searchProviders:
+		| {
+				// 搜索引擎id，提示词模板，优先级
+				providerId: string
+				promptTemplate: string
+				priority: number // 优先级越小越早调用
+				searchFirst: boolean // 先想再搜索/先搜后扩
+		  }[]
+		| undefined
 }
 
 export interface ModelInfo {
