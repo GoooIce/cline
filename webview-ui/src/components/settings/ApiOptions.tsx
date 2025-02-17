@@ -33,6 +33,7 @@ import {
 	openRouterDefaultModelInfo,
 	vertexDefaultModelId,
 	vertexModels,
+	deepClaudeModelInfoDefaults,
 } from "../../../../src/shared/api"
 import { ExtensionMessage } from "../../../../src/shared/ExtensionMessage"
 import { useExtensionState } from "../../context/ExtensionStateContext"
@@ -42,6 +43,7 @@ import OpenRouterModelPicker, { ModelDescriptionMarkdown } from "./OpenRouterMod
 import styled from "styled-components"
 import * as vscodemodels from "vscode"
 import { getAsVar, VSC_DESCRIPTION_FOREGROUND } from "../../utils/vscStyles"
+import DeepClaudeView from "./DeepClaudeView"
 
 interface ApiOptionsProps {
 	showModelOptions: boolean
@@ -1167,6 +1169,8 @@ const ApiOptions = ({ showModelOptions, apiErrorMessage, modelIdErrorMessage, is
 
 			{selectedProvider === "openrouter" && showModelOptions && <OpenRouterModelPicker isPopup={isPopup} />}
 
+			{selectedProvider === "deepclaude" && showModelOptions && <DeepClaudeView  />}
+
 			{modelIdErrorMessage && (
 				<p
 					style={{
@@ -1406,10 +1410,10 @@ export function normalizeApiConfiguration(apiConfiguration?: ApiConfiguration): 
 			}
 		case "deepclaude":
 			return {
-					selectedProvider: provider,
-					selectedModelId: apiConfiguration?.openRouterModelId || openRouterDefaultModelId,
-					selectedModelInfo: apiConfiguration?.openRouterModelInfo || openRouterDefaultModelInfo,
-				}
+				selectedProvider: provider,
+				selectedModelId: "deep claude",
+				selectedModelInfo: deepClaudeModelInfoDefaults,
+			}
 		default:
 			return getProviderData(anthropicModels, anthropicDefaultModelId)
 	}

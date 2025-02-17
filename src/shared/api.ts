@@ -57,6 +57,7 @@ export interface ApiHandlerOptions {
 	vsCodeLmModelSelector?: any
 	o3MiniReasoningEffort?: string
 	qwenApiLine?: string
+	deepClaude?: DeepInfo
 }
 
 export type ApiConfiguration = ApiHandlerOptions & {
@@ -64,6 +65,23 @@ export type ApiConfiguration = ApiHandlerOptions & {
 }
 
 // Models
+
+export interface DeepInfo {
+	modelProviders: { // 模型id，供应商id，提示词模板，优先级, 应用字段设置
+		modelId: string,
+		providerId: string,
+		promptTemplate: string,
+		priority: number, // 优先级越小越早调用
+		applicationFields: string[], // 默认为 content
+		isEnabled: boolean, // 是否启用默认为 true
+	}[],
+	searchProviders: { // 搜索引擎id，提示词模板，优先级
+		providerId: string,
+		promptTemplate: string,
+		priority: number, // 优先级越小越早调用
+		searchFirst: boolean, // 先想再搜索/先搜后扩
+	}[] | undefined,
+}
 
 export interface ModelInfo {
 	maxTokens?: number
@@ -744,4 +762,14 @@ export const liteLlmModelInfoSaneDefaults: ModelInfo = {
 	supportsPromptCache: false,
 	inputPrice: 0,
 	outputPrice: 0,
+}
+
+export const deepClaudeModelInfoDefaults: ModelInfo = {
+	maxTokens: -1,
+	contextWindow: -1,
+	supportsImages: false,
+	supportsPromptCache: false,
+	inputPrice: 0,
+	outputPrice: 0,
+	description: "https://github.com/getAsterisk/deepclaude, but TS dev",
 }

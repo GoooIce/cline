@@ -103,13 +103,16 @@ export class DeepClaudeHandler implements ApiHandler {
 				}
 			}
 
-            // log reasoning
-            console.log("[DeepClaudeHandler] reasoningTokens:", reasoningTokens)
+			// log reasoning
+			console.log("[DeepClaudeHandler] reasoningTokens:", reasoningTokens)
 
 			// Add reasoning as an assistant message and keep original Anthropic format
-			const claudeMessages = [ ...messages, { role: "assistant", content: reasoningTokens.join('') }  as Anthropic.Messages.MessageParam]
+			const claudeMessages = [
+				...messages,
+				{ role: "assistant", content: reasoningTokens.join("") } as Anthropic.Messages.MessageParam,
+			]
 			const claudeStream = this.claudeClient.createMessage(systemPrompt, claudeMessages)
-            yield* claudeStream
+			yield* claudeStream
 		} catch (err) {
 			console.error("[DeepClaudeHandler] createMessage 内部错误:", err)
 			throw err
